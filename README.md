@@ -1,39 +1,4 @@
-# __PROTOTYPE_NAME__
-
-## Start a new prototype
-
-This repo is a template. Don't change it to build your prototype. Make your own
-copy:
-
-1. Select **Use this template → Create a new repository** at the top of this
-   page.
-2. Leave **Owner** as your own account, give it a short name, and choose
-   **Public**. Then select **Create repository**.
-3. Open your new repo in your AI coding app: Claude, GitHub Copilot or Codex.
-4. Start a session in it and say: *"Set this up."*
-
-The AI asks a few questions, gets it running, switches on its live link and
-opens your first pull request. It takes about 10 minutes. First time? Read
-[Building coded prototypes with AI](docs/building-with-ai.md) for an overview,
-then work through [Getting set up](docs/getting-set-up.md).
-
-To see what you start with before making a copy, open the template's live demo:
-<https://spark450.github.io/Design-proto-demo-AB/>. The Angular version is at
-<https://spark450.github.io/Design-proto-demo-AB/angular/>.
-
-**Working on the template itself?** The React app lives in `apps/react/`, under
-a small wrapper `package.json` that passes `npm run ...` commands through to it.
-An Angular version of the same screens lives in `apps/angular/`, with its own
-packages: run `npm run setup:angular` once, then `npm run dev:angular`,
-`npm run test:angular` or `npm run build:angular`. A change to the screens in
-one app should be made in the other too. Setup moves one app to the top of the
-repo, so paths in the rest of this README and in the skills (`src/...`,
-`index.html`) are written as they'll be after setup. In the template,
-`npm run build` writes to `apps/react/dist/`. Text that only applies to one
-framework sits between `<!-- REACT -->` or `<!-- ANGULAR -->` markers, which
-setup removes.
-
----
+# Prototype demo
 
 A coded prototype built with the
 [Government of Alberta design system](https://design.alberta.ca). It's for
@@ -118,8 +83,6 @@ Leave `npm run dev` running. Save a file and the page updates by itself.
 
 ## Where things live
 
-<!-- REACT -->
-
 | Folder or file | What's in it |
 | --- | --- |
 | `src/worker/` | The worker side: a workspace for people inside government, at `/internal`. A case list, a case page where you record a decision, and search |
@@ -146,38 +109,6 @@ side, delete everything in its column.
 Keep `src/shared/`: both sides use it. Run `npm test` and `npm run build`
 afterwards to check nothing else needed it.
 
-<!-- /REACT -->
-<!-- ANGULAR -->
-
-| Folder or file | What's in it |
-| --- | --- |
-| `src/app/worker/` | The worker side: a workspace for people inside government, at `/internal`. A case list, a case page where you record a decision, and search |
-| `src/app/citizen/` | The citizen side: a public form. A start page at `/apply`, four questions, a check-your-answers page and a done page |
-| `src/app/shared/` | Used by both sides: the directory page at `/`, the prototype controls, the not-found and error pages, the version banner and the prototype's name |
-| `src/app/data/sample.ts` | Made-up sample data |
-| `src/app/app.routes.ts` | The list of every page address, and which sides the directory and the prototype controls show |
-| `src/styles.css` | Styles for the whole prototype, including the table rules |
-| `docs/` | Requirements docs and guides |
-| `.agents/skills/` | Instructions the AI follows on its own. You don't need to open these |
-| `AGENTS.md` | House rules for the AI. `CLAUDE.md` points Claude at it |
-
-### Which files belong to each side
-
-This prototype can have a worker side, a citizen side, or both. To remove a
-side, delete everything in its column.
-
-| | Worker side | Citizen side |
-| --- | --- | --- |
-| Folder | `src/app/worker/` (all of it) | `src/app/citizen/` (all of it) |
-| Routes in `src/app/app.routes.ts` | The `WORKER` import line, the `WORKER` block and the `// WORKER` line in `sides` | The `CITIZEN` import line, the `CITIZEN` block and the `// CITIZEN` line in `sides` |
-| Tests in `src/app/app.spec.ts` | The `WORKER` block | The `CITIZEN` block |
-| Also | The mobile menu rule at the top of `src/styles.css`. `src/app/data/sample.ts` is only used by this side: keep the file as a home for made-up data | Nothing else |
-
-Keep `src/app/shared/`: both sides use it. Run `npm test` and `npm run build`
-afterwards to check nothing else needed it.
-
-<!-- /ANGULAR -->
-
 ### Prototype controls
 
 The dashed **Prototype** button in the bottom corner opens a list of every page.
@@ -195,20 +126,9 @@ previews and snapshots.
   the directory page. A test
   checks that every page in those lists opens.
 
-<!-- REACT -->
-
 - **Don't want the controls?** For example, for a session where the participant
   drives. Delete the `<PrototypeControls sides={sides} />` line in
   `src/App.tsx`.
-
-<!-- /REACT -->
-<!-- ANGULAR -->
-
-- **Don't want the controls?** For example, for a session where the participant
-  drives. Delete the `<app-prototype-controls [sides]="sides" />` line in
-  `src/app/app.ts`.
-
-<!-- /ANGULAR -->
 
 ## Sources
 
@@ -258,20 +178,9 @@ branch exists. In a new copy of the template, first-run setup does this.
   back. `scripts/make-404.mjs` and the script in `index.html` are the two
   halves, and `scripts/pages-routing.test.mjs` keeps them honest.
 
-<!-- REACT -->
-
 - **TypeScript is relaxed on purpose.** `strict` is off and `npm run build`
   doesn't type-check, so a half-finished page never blocks a demo. Run
   `npm run typecheck` when you want the stricter check.
-
-<!-- /REACT -->
-<!-- ANGULAR -->
-
-- **TypeScript is relaxed on purpose.** `strict` and Angular's strict template
-  checks are off, so a half-finished page is less likely to block a demo.
-  `npm run build` still stops on real code errors.
-
-<!-- /ANGULAR -->
 
 - **The page is marked `noindex`.** The site is public, so this asks search
   engines to leave it out of their results. It's a request, not a lock.

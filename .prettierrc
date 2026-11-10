@@ -5,7 +5,7 @@
   "trailingComma": "all",
   "overrides": [
     {
-      "files": ["apps/angular/**/*.html", "src/**/*.html"],
+      "files": ["src/**/*.html"],
       "options": {
         "parser": "angular"
       }
