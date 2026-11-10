@@ -1,15 +1,5 @@
 {
-  "previews": [
-    {
-      "slug": "copyright-examiner-workspace",
-      "branch": "copyright-examiner-workspace",
-      "pr": "4",
-      "title": "Build the copyright examiner workspace",
-      "commit": "8f86727e5a02b1b80e42a1944eb9dc18c9f25dbc",
-      "created": "2026-11-10T19:36:06.217Z",
-      "updated": "2026-11-10T19:36:06.217Z"
-    }
-  ],
+  "previews": [],
   "snapshots": [
     {
       "slug": "copyright-examiner-workspace",
