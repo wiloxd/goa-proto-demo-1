@@ -70,7 +70,9 @@ function serve(files, pathname) {
 }
 
 const inlineScripts = (files, doc) =>
-  [...files[doc].matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\b[^>]*>/gi)].map((m) => m[1]);
+  [...files[doc].matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\b[^>]*>/gi)].map(
+    (m) => m[1],
+  );
 
 /** Follow a URL the way a browser would, running whatever the server hands back. */
 function visit(url, files = site) {
@@ -159,9 +161,7 @@ describe("a preview build in a subdirectory", () => {
   /* The path travels as ?/<path>, so every & in the original URL has to be
      escaped and put back or the second parameter onwards is lost. */
   it("survives a query with several parameters", () => {
-    expect(
-      visit("/preview/my-branch/start/question?answer=yes&a=1&b=2"),
-    ).toEqual({
+    expect(visit("/preview/my-branch/start/question?answer=yes&a=1&b=2")).toEqual({
       doc: "/preview/my-branch/index.html",
       url: "/preview/my-branch/start/question?answer=yes&a=1&b=2",
     });
@@ -243,6 +243,55 @@ describe("a prototype set up for one framework", () => {
     expect(visit("/angular/internal")).toEqual({
       doc: "/404.html",
       url: "/angular/internal",
+    });
+  });
+});
+
+/* A public repo's site lives under /<repo-name>/, not at the domain root. The
+   built index.html says so in its asset links, and the 404 page has to match
+   preview paths under that folder. Before this was handled, every deep link
+   into a preview fell through to the main app. */
+describe("a site served from a repo folder", () => {
+  const rootedIndex = sourceIndex.replace(
+    'href="/site.webmanifest"',
+    'href="/my-repo/site.webmanifest"',
+  );
+  const repoSite = {
+    "/my-repo/index.html": rootedIndex,
+    "/404.html": buildFourOhFour(rootedIndex),
+    "/my-repo/preview/my-branch/index.html": previewIndex,
+    "/my-repo/v/feb-12-session/index.html": previewIndex,
+  };
+
+  it("still has a manifest link to read the folder from", () => {
+    expect(rootedIndex).toContain('href="/my-repo/site.webmanifest"');
+  });
+
+  it("routes a deep link to the preview, not to the main app", () => {
+    expect(visit("/my-repo/preview/my-branch/apply/review?change=1", repoSite)).toEqual({
+      doc: "/my-repo/preview/my-branch/index.html",
+      url: "/my-repo/preview/my-branch/apply/review?change=1",
+    });
+  });
+
+  it("routes a deep link to a snapshot", () => {
+    expect(visit("/my-repo/v/feb-12-session/apply", repoSite)).toEqual({
+      doc: "/my-repo/v/feb-12-session/index.html",
+      url: "/my-repo/v/feb-12-session/apply",
+    });
+  });
+
+  it("answers a main-site deep link from the 404 fallback, without a redirect", () => {
+    expect(visit("/my-repo/internal/cases", repoSite)).toEqual({
+      doc: "/404.html",
+      url: "/my-repo/internal/cases",
+    });
+  });
+
+  it("stops at the not-found page for a preview that's gone", () => {
+    expect(visit("/my-repo/preview/deleted-branch/apply", repoSite)).toEqual({
+      doc: "/404.html",
+      url: "/my-repo/preview/deleted-branch/apply",
     });
   });
 });
