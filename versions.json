@@ -12,6 +12,13 @@
   ],
   "snapshots": [
     {
+      "slug": "copyright-examiner-workspace",
+      "note": "The first examiner workspace: applications list, application page with checks and decision, search.",
+      "ref": "copyright-examiner-workspace",
+      "commit": "8f86727e5a02b1b80e42a1944eb9dc18c9f25dbc",
+      "created": "2026-11-10T19:39:03.061Z"
+    },
+    {
       "slug": "copyright-applicant-form",
       "note": "The first copyright application form: eight questions, review with fee and declaration, confirmation.",
       "ref": "copyright-applicant-form",
