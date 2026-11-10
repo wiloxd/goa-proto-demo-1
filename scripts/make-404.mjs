@@ -20,6 +20,12 @@
  * another separate build, bounced the same way — but only when the site has
  * one, so a prototype set up for a single framework doesn't carry the rule.
  *
+ * A public repo's site isn't at the domain root: it lives under /<repo-name>/,
+ * so a preview is at /<repo-name>/preview/<name>/. The prelude matches paths
+ * under the site's root, which it reads from the built index.html (Vite has
+ * already written the root into every asset link there). Without that, every
+ * deep link into a preview of a public repo fell through to the main app.
+ *
  * Usage: node scripts/make-404.mjs <dist-dir>
  */
 
@@ -36,8 +42,20 @@ import { join } from "node:path";
 const BUILD_DIRECTORY = String.raw`\/(?:preview|v)\/[^/]+\/`;
 const ANGULAR_DIRECTORY = String.raw`\/(?:(?:preview|v)\/[^/]+\/)?angular\/`;
 
-export function prelude({ angular = false } = {}) {
-  const directory = angular ? `${ANGULAR_DIRECTORY}|${BUILD_DIRECTORY}` : BUILD_DIRECTORY;
+/* "/my-repo/" becomes "\/my-repo", ready to sit in front of the patterns
+   above inside a regex literal. The root itself becomes "". */
+function rootPattern(root) {
+  return root
+    .replace(/\/+$/, "")
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/\//g, "\\/");
+}
+
+export function prelude({ angular = false, root = "/" } = {}) {
+  const directories = angular
+    ? `${ANGULAR_DIRECTORY}|${BUILD_DIRECTORY}`
+    : BUILD_DIRECTORY;
+  const directory = `${rootPattern(root)}(?:${directories})`;
   return `
     <!-- Preview and snapshot builds live in a subdirectory and are separate
          builds. Send them to their own index rather than letting the main app
@@ -63,12 +81,21 @@ export function prelude({ angular = false } = {}) {
 `;
 }
 
+/** Where the site lives, read from the manifest link in a built index.html. */
+export function siteRootOf(indexHtml) {
+  const match = /<link[^>]*rel="manifest"[^>]*href="([^"]*)site\.webmanifest"/.exec(
+    indexHtml,
+  );
+  return match && match[1].startsWith("/") ? match[1] : "/";
+}
+
 /** The main build's index.html, with the subdirectory router in front of it. */
-export function buildFourOhFour(indexHtml, options) {
+export function buildFourOhFour(indexHtml, options = {}) {
   if (!indexHtml.includes("<head>")) {
     throw new Error("No <head> in the built index.html — cannot build the 404 page.");
   }
-  return indexHtml.replace("<head>", `<head>\n${prelude(options)}`);
+  const root = options.root ?? siteRootOf(indexHtml);
+  return indexHtml.replace("<head>", `<head>\n${prelude({ ...options, root })}`);
 }
 
 /* Only when run as a command, so the test can import the parts above. */
