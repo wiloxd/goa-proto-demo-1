@@ -18,7 +18,7 @@ import type {
 } from "@abgov/ui-components-common";
 import { isInThePast } from "../shared/isInThePast";
 import { useAnswers } from "./answers";
-import { countries, type YesNo } from "./options";
+import { countries, type YesNo } from "../shared/copyright";
 import { QuestionPage } from "./QuestionPage";
 
 const noErrors = { published: "", publishedDate: "", publishedCountry: "" };

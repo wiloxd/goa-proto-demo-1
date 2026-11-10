@@ -9,28 +9,32 @@ import { Route } from "react-router-dom";
 import type { ControlSide } from "../shared/controls/types";
 import { WorkerShell } from "./WorkerShell";
 import { WorkerHomePage } from "./WorkerHomePage";
-import { CasePage } from "./CasePage";
+import { ApplicationPage } from "./ApplicationPage";
 import { SearchPage } from "./SearchPage";
 
 export const workerRoutes = (
   <Route path="/internal" element={<WorkerShell />}>
     <Route index element={<WorkerHomePage />} />
-    <Route path="cases/:caseId" element={<CasePage />} />
+    <Route path="applications/:applicationId" element={<ApplicationPage />} />
     <Route path="search" element={<SearchPage />} />
   </Route>
 );
 
 export const workerScreens: ControlSide = {
   name: "Worker side",
-  description: "The workspace staff use to find cases, read the details and record a decision.",
+  description:
+    "The workspace examiners use to review copyright applications and register, refuse or ask for changes.",
   home: "/internal",
   owns: (pathname) => pathname === "/internal" || pathname.startsWith("/internal/"),
   sections: [
     {
       heading: "Workspace",
       pages: [
-        { label: "Cases", path: "/internal" },
-        { label: "A case", path: "/internal/cases/SAMPLE-001" },
+        { label: "Applications", path: "/internal" },
+        { label: "A new application", path: "/internal/applications/SAMPLE-CR-0006" },
+        { label: "Waiting on applicant", path: "/internal/applications/SAMPLE-CR-0003" },
+        { label: "Registered", path: "/internal/applications/SAMPLE-CR-0002" },
+        { label: "Refused", path: "/internal/applications/SAMPLE-CR-0001" },
         { label: "Search", path: "/internal/search" },
       ],
     },

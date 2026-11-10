@@ -16,7 +16,7 @@ import type {
   GoabTextAreaOnChangeDetail,
 } from "@abgov/ui-components-common";
 import { useAnswers } from "./answers";
-import type { Owner } from "./options";
+import type { Owner } from "../shared/copyright";
 import { QuestionPage } from "./QuestionPage";
 
 const noErrors = { owner: "", ownerName: "", ownerAddress: "" };

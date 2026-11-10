@@ -13,7 +13,7 @@ import { OwnerPage } from "./OwnerPage";
 import { TitlePage } from "./TitlePage";
 import { TypeOfWorkPage } from "./TypeOfWorkPage";
 import { UploadPage } from "./UploadPage";
-import { formatFileSize } from "./options";
+import { formatFileSize } from "../shared/copyright";
 
 function renderPage(path: string, page: ReactElement, answers: Partial<Answers> = {}) {
   return renderToStaticMarkup(

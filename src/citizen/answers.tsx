@@ -8,7 +8,7 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-import type { Owner, WorkType, YesNo } from "./options";
+import type { Owner, WorkType, YesNo } from "../shared/copyright";
 
 export interface Answers {
   typeOfWork: WorkType;

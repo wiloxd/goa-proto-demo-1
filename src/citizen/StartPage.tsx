@@ -3,7 +3,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { GoabButton, GoabText } from "@abgov/react-components";
-import { applicationFee } from "./options";
+import { applicationFee } from "../shared/copyright";
 import { questions } from "./journey";
 
 export function StartPage() {

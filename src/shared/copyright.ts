@@ -1,6 +1,6 @@
-/* The choices offered in the copyright application, with the words shown for
- * each. The review page and the confirmation use the same labels, so change
- * them here and they change everywhere.
+/* Copyright choices and the words shown for each, shared by the applicant
+ * form and the examiner workspace. Change a label here and it changes on both
+ * sides.
  *
  * The country list is a short sample, not a complete list.
  */

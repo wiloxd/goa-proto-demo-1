@@ -22,7 +22,12 @@ import { formatDate } from "../shared/formatDate";
 import { usePageTitleSize } from "../shared/usePageTitleSize";
 import { useAnswers, type Answers } from "./answers";
 import { donePath, questions } from "./journey";
-import { applicationFee, formatFileSize, workTypes, yesNoLabels } from "./options";
+import {
+  applicationFee,
+  formatFileSize,
+  workTypes,
+  yesNoLabels,
+} from "../shared/copyright";
 
 interface Row {
   question: string;

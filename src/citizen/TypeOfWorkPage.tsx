@@ -4,7 +4,7 @@ import { useState } from "react";
 import { GoabFormItem, GoabRadioGroup, GoabRadioItem } from "@abgov/react-components";
 import type { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 import { useAnswers } from "./answers";
-import { workTypes, type WorkType } from "./options";
+import { workTypes, type WorkType } from "../shared/copyright";
 import { QuestionPage } from "./QuestionPage";
 
 export function TypeOfWorkPage() {

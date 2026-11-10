@@ -16,8 +16,7 @@ single work of their own could get through it in about ten minutes, one
 question at a time.
 
 It has two sides: an applicant who fills in the application, and an examiner
-who reviews it. This document covers the applicant side. The examiner side will
-be added when it's built.
+who reviews it. Both are covered here.
 
 ## The scoping session, November 10 2026
 
@@ -59,6 +58,40 @@ registration. Treat it as **derived and unconfirmed**.
 | Special handling | Dropped |
 | Certification | Kept, as a declaration checkbox on the review page |
 
+## The examiner side
+
+**Decided in the same November 10 session:** the examiner side is a workspace
+where staff review applications and record one of three outcomes. It was built
+after the applicant form was approved, and uses the same answers, so each
+application on the examiner side shows exactly what an applicant would have
+entered.
+
+**Three outcomes, modelled loosely on eCO's examination:** register the work,
+ask the applicant for changes, or refuse. Asking for changes stands in for
+eCO's correspondence with the applicant, which can go back and forth for
+months; here it's a single message, and the application waits on the
+applicant. Refusing needs a reason from a short list and a message in plain
+words, because an applicant who is refused will want to know why.
+
+The refusal reasons are **invented**: not original enough, not something
+copyright protects, copy missing or can't be opened, copy doesn't match the
+application. Nobody should quote this list until someone who examines
+applications has looked at it.
+
+**The checklist is prototype-only.** Three checks sit above the decision as a
+prompt for what an examiner looks at. They don't block a decision and aren't
+recorded. Whether examiners want a checklist at all, and whether it should be
+required, is a question for research.
+
+**The registration counts from the day the application was submitted**, not the
+day it's decided. That mirrors eCO's effective date of registration and matches
+what the applicant is told on the confirmation page. It is an assumption, not
+confirmed policy, for the same reason as the applicant side's wording.
+
+**The list shows status, reference, title, type of work and the date
+submitted.** An Author column was tried and dropped: with it, the list was too
+wide to fit without wrapping. Authors can still be found with search.
+
 ## Assumptions
 
 Made to keep moving, each cheap to change. **None of these are real figures or
@@ -98,5 +131,8 @@ policy.**
   first version is about one person registering one thing.
 - **Payment**, for the reason above.
 - **Signing in and an applicant's account**, so there is no way to check on an
-  application after submitting. The examiner side will show what happens next
-  from the other direction.
+  application after submitting, or to reply when an examiner asks for changes.
+- **Assigning applications to examiners**, queues and workload. Every examiner
+  sees every application.
+- **Saving decisions.** A decision recorded in the prototype shows a
+  confirmation and is forgotten when you leave the page.
