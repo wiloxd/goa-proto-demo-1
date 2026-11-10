@@ -10,5 +10,13 @@
       "updated": "2026-11-10T19:15:14.787Z"
     }
   ],
-  "snapshots": []
+  "snapshots": [
+    {
+      "slug": "copyright-applicant-form",
+      "note": "The first copyright application form: eight questions, review with fee and declaration, confirmation.",
+      "ref": "copyright-applicant-form",
+      "commit": "52683adb00f0b55cd0d1232f70cc4075755825a0",
+      "created": "2026-11-10T19:30:42.148Z"
+    }
+  ]
 }
