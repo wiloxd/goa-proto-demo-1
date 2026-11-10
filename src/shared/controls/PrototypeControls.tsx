@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { resetDemoData } from "../demoData";
 import { POSITION_KEY } from "./dragPosition";
 import { useDragPosition } from "./useDragPosition";
 import type { ControlSide } from "./types";
@@ -29,12 +30,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 function startOver(home: string) {
   try {
     for (const key of Object.keys(sessionStorage)) {
-      if (key.startsWith("proto:") && key !== POSITION_KEY) sessionStorage.removeItem(key);
+      if (key.startsWith("proto:") && key !== POSITION_KEY)
+        sessionStorage.removeItem(key);
     }
   } catch {
     /* Storage blocked. The reload still happens. */
   }
   window.location.assign(`${base}${home}`);
+}
+
+/* Forgets every application submitted and decision recorded in this browser,
+   leaving only the built-in sample data, then reloads. */
+function resetDemo() {
+  resetDemoData();
+  window.location.reload();
 }
 
 export function PrototypeControls({ sides }: { sides: ControlSide[] }) {
@@ -94,7 +103,9 @@ export function PrototypeControls({ sides }: { sides: ControlSide[] }) {
           <div className="controls__section">
             <Link
               to="/"
-              className={"controls__item" + (pathname === "/" ? " controls__item--current" : "")}
+              className={
+                "controls__item" + (pathname === "/" ? " controls__item--current" : "")
+              }
               aria-current={pathname === "/" ? "page" : undefined}
             >
               Directory
@@ -109,7 +120,9 @@ export function PrototypeControls({ sides }: { sides: ControlSide[] }) {
                 <Link
                   key={side.name}
                   to={side.home}
-                  className={"controls__item" + (isCurrent ? " controls__item--current" : "")}
+                  className={
+                    "controls__item" + (isCurrent ? " controls__item--current" : "")
+                  }
                   aria-current={isCurrent ? "true" : undefined}
                 >
                   {side.name}
@@ -150,6 +163,9 @@ export function PrototypeControls({ sides }: { sides: ControlSide[] }) {
               onClick={() => startOver(currentSide?.home ?? "/")}
             >
               Start over
+            </button>
+            <button type="button" className="controls__item" onClick={resetDemo}>
+              Reset demo data
             </button>
             {/* Only once the controls have been moved. Offering to put them
                 back where they already are would look like a broken button. */}

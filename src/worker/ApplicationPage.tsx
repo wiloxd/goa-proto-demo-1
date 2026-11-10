@@ -3,8 +3,9 @@
  * the right.
  *
  * Applications that already have an outcome show it instead of the decision
- * form. A decision recorded here isn't saved anywhere: it shows a confirmation,
- * and is gone when you leave the page.
+ * form. A decision recorded here is saved in this browser (see
+ * src/shared/demoData.ts), so the list and the page show it from then on.
+ * "Reset demo data" in the prototype controls undoes it.
  */
 
 import { useState } from "react";
@@ -33,7 +34,8 @@ import type {
   GoabTextAreaOnChangeDetail,
 } from "@abgov/ui-components-common";
 
-import { findApplication, statusBadge, type SampleApplication } from "../data/sample";
+import { statusBadge, type SampleApplication } from "../data/sample";
+import { recordDecision as saveDecision, useApplication } from "../shared/demoData";
 import { formatFileSize, workTypes, yesNoLabels } from "../shared/copyright";
 import { formatDate } from "../shared/formatDate";
 
@@ -140,13 +142,32 @@ function ApplicationDetails({ app }: { app: SampleApplication }) {
 }
 
 /* For applications that already have an outcome. */
-function Outcome({ app }: { app: SampleApplication }) {
+const confirmations: Partial<Record<SampleApplication["status"], string>> = {
+  Registered: "The applicant is emailed their certificate.",
+  "Waiting on applicant": "The applicant is emailed your message.",
+  Refused: "The applicant is emailed the reason and your message.",
+};
+
+function Outcome({
+  app,
+  justRecorded,
+}: {
+  app: SampleApplication;
+  justRecorded: boolean;
+}) {
   const outcome = app.outcome;
   if (!outcome) return null;
   const who = `${outcome.by}, ${formatDate(outcome.on)}`;
 
   return (
     <Card heading="Decision">
+      {justRecorded && (
+        <GoabCallout type="success" heading="Decision recorded" mb="none">
+          <GoabText size="body-s" mt="none" mb="none">
+            {confirmations[app.status]}
+          </GoabText>
+        </GoabCallout>
+      )}
       <GoabBlock direction="column" gap="s" width="100%">
         {app.status === "Registered" && (
           <>
@@ -178,13 +199,18 @@ function Outcome({ app }: { app: SampleApplication }) {
 
 const noErrors = { decision: "", reason: "", message: "" };
 
-function DecisionForm({ app }: { app: SampleApplication }) {
+function DecisionForm({
+  app,
+  onRecorded,
+}: {
+  app: SampleApplication;
+  onRecorded: () => void;
+}) {
   const [checked, setChecked] = useState<string[]>([]);
   const [decision, setDecision] = useState<Decision>("");
   const [reason, setReason] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState(noErrors);
-  const [recorded, setRecorded] = useState(false);
 
   const recordDecision = () => {
     const found = {
@@ -197,39 +223,18 @@ function DecisionForm({ app }: { app: SampleApplication }) {
     };
     setErrors(found);
     if (Object.values(found).some(Boolean)) return;
-    setRecorded(true);
-  };
 
-  if (recorded) {
-    const registrationNumber = app.id.replace("SAMPLE-CR-", "SAMPLE-REG-");
-    return (
-      <Card heading="Decision">
-        {decision === "register" && (
-          <GoabCallout type="success" heading="Registered" mb="none">
-            <GoabText size="body-s" mt="none" mb="none">
-              Registration number {registrationNumber}, effective from{" "}
-              {formatDate(app.submitted)}. The applicant is emailed their certificate.
-            </GoabText>
-          </GoabCallout>
-        )}
-        {decision === "changes" && (
-          <GoabCallout type="information" heading="Sent to the applicant" mb="none">
-            <GoabText size="body-s" mt="none" mb="none">
-              The status is now Waiting on applicant. It comes back to the list when they
-              reply.
-            </GoabText>
-          </GoabCallout>
-        )}
-        {decision === "refuse" && (
-          <GoabCallout type="important" heading="Refused" mb="none">
-            <GoabText size="body-s" mt="none" mb="none">
-              The applicant is emailed the reason and your message.
-            </GoabText>
-          </GoabCallout>
-        )}
-      </Card>
-    );
-  }
+    if (decision === "register") {
+      saveDecision(app.id, "Registered", {
+        registrationNumber: app.id.replace("SAMPLE-CR-", "SAMPLE-REG-"),
+      });
+    } else if (decision === "changes") {
+      saveDecision(app.id, "Waiting on applicant", { message: message.trim() });
+    } else {
+      saveDecision(app.id, "Refused", { reason, message: message.trim() });
+    }
+    onRecorded();
+  };
 
   const messageField = (label: string, helpText: string) => (
     <GoabFormItem
@@ -339,7 +344,10 @@ function DecisionForm({ app }: { app: SampleApplication }) {
 
 export function ApplicationPage() {
   const { applicationId } = useParams();
-  const app = findApplication(applicationId);
+  const app = useApplication(applicationId);
+  /* Which application a decision was just recorded on, so the confirmation
+     doesn't follow you to the next one. */
+  const [justRecordedOn, setJustRecordedOn] = useState("");
 
   if (!app) {
     return (
@@ -374,7 +382,15 @@ export function ApplicationPage() {
 
       <GoabGrid minChildWidth="315px" gap="l">
         <ApplicationDetails app={app} />
-        {decided ? <Outcome app={app} /> : <DecisionForm app={app} />}
+        {decided ? (
+          <Outcome app={app} justRecorded={justRecordedOn === app.id} />
+        ) : (
+          <DecisionForm
+            key={app.id}
+            app={app}
+            onRecorded={() => setJustRecordedOn(app.id)}
+          />
+        )}
       </GoabGrid>
     </>
   );

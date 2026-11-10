@@ -33,6 +33,8 @@ export interface Answers {
   fileName: string;
   fileSize: number;
   fileType: string;
+  /** The reference given when the application was submitted. */
+  submittedReference: string;
 }
 
 export const emptyAnswers: Answers = {
@@ -55,6 +57,7 @@ export const emptyAnswers: Answers = {
   fileName: "",
   fileSize: 0,
   fileType: "",
+  submittedReference: "",
 };
 
 const STORAGE_KEY = "proto:copyright-answers";
