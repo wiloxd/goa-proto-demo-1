@@ -1,15 +1,5 @@
 {
-  "previews": [
-    {
-      "slug": "save-demo-data",
-      "branch": "save-demo-data",
-      "pr": "5",
-      "title": "Connect the applicant form and examiner workspace",
-      "commit": "d2c71dc6e1fe75a03eb6c330b959ae64c82f5e2d",
-      "created": "2026-11-10T19:45:47.613Z",
-      "updated": "2026-11-10T19:45:47.613Z"
-    }
-  ],
+  "previews": [],
   "snapshots": [
     {
       "slug": "copyright-connected-demo",
