@@ -1,15 +1,6 @@
 {
   "previews": [
     {
-      "slug": "fix-preview-deep-links",
-      "branch": "fix-preview-deep-links",
-      "pr": "3",
-      "title": "Fix deep links into previews",
-      "commit": "0c6838f7e2670eb81b493a967a00a4454b1c5d89",
-      "created": "2026-11-10T19:21:27.782Z",
-      "updated": "2026-11-10T19:21:27.782Z"
-    },
-    {
       "slug": "copyright-applicant-form",
       "branch": "copyright-applicant-form",
       "pr": "2",
