@@ -4,14 +4,15 @@
 import { useState } from "react";
 import { GoabFormItem, GoabInput, GoabText } from "@abgov/react-components";
 import type { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
-import { sampleApplications } from "../data/sample";
+import { useApplications } from "../shared/demoData";
 import { ApplicationsTable } from "./ApplicationsTable";
 
 export function SearchPage() {
+  const applications = useApplications();
   const [query, setQuery] = useState("");
   const term = query.trim().toLowerCase();
   const matches = term
-    ? sampleApplications.filter((a) =>
+    ? applications.filter((a) =>
         [a.id, a.title, a.otherTitle, a.authorName].some((field) =>
           field.toLowerCase().includes(term),
         ),

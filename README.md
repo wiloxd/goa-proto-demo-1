@@ -115,8 +115,15 @@ The dashed **Prototype** button in the bottom corner opens a list of every page.
 Use it in a demo to switch between the citizen and worker sides, or to jump
 straight to a page without filling in the form first. **Directory** at the top
 goes back to the directory page. **Start over** clears any
-answers and goes back to the start. Drag the ⠿ handle if the button covers
+answers and goes back to the start. **Reset demo data** forgets every
+application submitted and decision recorded in this browser, leaving only the
+built-in sample applications. Drag the ⠿ handle if the button covers
 something. Double-click the handle to put it back.
+
+Applications submitted on the form show up in the examiner's list, and
+examiners' decisions stick. Both are saved in the browser you're using, so they
+survive closing the tab but nobody else sees them. Reset before each demo or
+research session to start clean.
 
 The controls aren't part of the design. They show on every page, including in
 previews and snapshots.

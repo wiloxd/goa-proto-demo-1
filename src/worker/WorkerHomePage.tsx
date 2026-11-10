@@ -1,12 +1,14 @@
 /* The examiner's landing page: every application, newest first. The data comes
- * from src/data/sample.ts and is all made up. */
+ * from src/data/sample.ts, plus anything submitted on the applicant form in
+ * this browser (src/shared/demoData.ts). */
 
 import { GoabText } from "@abgov/react-components";
-import { sampleApplications } from "../data/sample";
+import { useApplications } from "../shared/demoData";
 import { ApplicationsTable } from "./ApplicationsTable";
 
 export function WorkerHomePage() {
-  const waiting = sampleApplications.filter((a) => a.status === "New").length;
+  const applications = useApplications();
+  const waiting = applications.filter((a) => a.status === "New").length;
 
   return (
     <>
@@ -14,10 +16,10 @@ export function WorkerHomePage() {
         Applications
       </GoabText>
       <GoabText size="body-s" color="secondary" mt="none" mb="xl">
-        {waiting} new · {sampleApplications.length} in total · newest first
+        {waiting} new · {applications.length} in total · newest first
       </GoabText>
 
-      <ApplicationsTable rows={sampleApplications} />
+      <ApplicationsTable rows={applications} />
     </>
   );
 }

@@ -92,6 +92,32 @@ confirmed policy, for the same reason as the applicant side's wording.
 submitted.** An Author column was tried and dropped: with it, the list was too
 wide to fit without wrapping. Authors can still be found with search.
 
+## Connecting the two sides
+
+**Decided with the designer on November 10 2026**, after both sides were
+built. An application submitted on the form now appears in the examiner's list
+with its own reference, and an examiner's decision changes its status from then
+on. This lets one person run the whole story in a demo: apply, then review.
+
+Three levels of saving were weighed. Keeping everything per tab, as before,
+can't connect the sides, because the examiner usually opens in another tab.
+A shared online database would let several people and devices see the same
+applications. It was rejected because the published site is public: anyone
+with the link could add entries, nobody could make sure they held only sample
+data, and it would need an account and upkeep a prototype doesn't justify.
+
+The chosen level saves in the browser being used. It survives closing the tab
+and every tab sees it, but no other browser or person does. **This is
+prototype-only.** It says nothing about how a real service would store
+applications.
+
+**"Reset demo data"** in the prototype controls clears it, so each demo or
+research session can start from the same six sample applications.
+
+**References carry on from the highest one in use**, starting at
+SAMPLE-CR-0007, and a registered application gets the matching SAMPLE-REG
+number. Both are invented formats.
+
 ## Assumptions
 
 Made to keep moving, each cheap to change. **None of these are real figures or
@@ -135,4 +161,6 @@ policy.**
 - **Assigning applications to examiners**, queues and workload. Every examiner
   sees every application.
 - **Saving decisions.** A decision recorded in the prototype shows a
-  confirmation and is forgotten when you leave the page.
+  confirmation and is forgotten when you leave the page. *Since changed: both
+  sides now save to the browser. See
+  [Connecting the two sides](#connecting-the-two-sides).*

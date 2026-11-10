@@ -1,14 +1,15 @@
 /* The confirmation page, following the design system's result page pattern.
- * The reference number and timeline are made up. */
+ * The reference number is the one the application was saved under (see
+ * src/shared/demoData.ts). The timeline is made up. */
 
 import { Link } from "react-router-dom";
 import { GoabCallout, GoabText } from "@abgov/react-components";
 import { usePageTitleSize } from "../shared/usePageTitleSize";
-import { useAnswers } from "./answers";
+import { emptyAnswers, useAnswers } from "./answers";
 import { startPath } from "./journey";
 
 export function DonePage() {
-  const { answers } = useAnswers();
+  const { answers, saveAnswers } = useAnswers();
   const titleSize = usePageTitleSize();
   const email = answers.contactEmail || "the email address you gave us";
 
@@ -20,7 +21,8 @@ export function DonePage() {
 
       <GoabCallout type="success" heading="We've received your application">
         <GoabText size="body-m" mt="none" mb="none">
-          Your reference number is <strong>SAMPLE-CR-0001</strong>
+          Your reference number is{" "}
+          <strong>{answers.submittedReference || "SAMPLE-CR-0000"}</strong>
         </GoabText>
       </GoabCallout>
 
@@ -47,7 +49,9 @@ export function DonePage() {
       </GoabText>
 
       <GoabText size="body-m" mt="2xl" mb="none">
-        <Link to={startPath}>Register another work</Link>
+        <Link to={startPath} onClick={() => saveAnswers(emptyAnswers)}>
+          Register another work
+        </Link>
       </GoabText>
     </>
   );

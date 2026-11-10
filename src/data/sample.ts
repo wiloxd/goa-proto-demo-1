@@ -6,7 +6,8 @@
  * to invent it.
  *
  * Each application holds the same answers the applicant form collects, so the
- * two sides line up.
+ * two sides line up. Applications submitted on the form, and decisions
+ * examiners record, are added to these in src/shared/demoData.ts.
  */
 
 import type { GoabBadgeType } from "@abgov/ui-components-common";
@@ -212,10 +213,6 @@ export const sampleApplications: SampleApplication[] = [
     },
   },
 ];
-
-export function findApplication(id: string | undefined) {
-  return sampleApplications.find((a) => a.id === id);
-}
 
 /* Which badge colour each status uses. */
 export const statusBadge: Record<ApplicationStatus, GoabBadgeType> = {

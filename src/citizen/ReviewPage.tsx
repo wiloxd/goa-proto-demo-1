@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   GoabButton,
   GoabButtonGroup,
+  GoabCallout,
   GoabCheckbox,
   GoabFormItem,
   GoabLink,
@@ -20,6 +21,7 @@ import {
 import type { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 import { formatDate } from "../shared/formatDate";
 import { usePageTitleSize } from "../shared/usePageTitleSize";
+import { submitApplication } from "../shared/demoData";
 import { useAnswers, type Answers } from "./answers";
 import { donePath, questions } from "./journey";
 import {
@@ -113,16 +115,43 @@ function sections(answers: Answers): { heading: string; rows: Row[] }[] {
 
 export function ReviewPage() {
   const navigate = useNavigate();
-  const { answers } = useAnswers();
+  const { answers, saveAnswers } = useAnswers();
   const titleSize = usePageTitleSize();
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
+  const [incomplete, setIncomplete] = useState(false);
 
   const submit = () => {
+    const a = answers;
+    if (
+      !a.typeOfWork ||
+      !a.title ||
+      !a.yearFinished ||
+      !a.published ||
+      !a.authorName ||
+      !a.authorCitizenship ||
+      !a.madeForHire ||
+      !a.owner ||
+      !a.contactName ||
+      !a.contactEmail ||
+      !a.fileName
+    ) {
+      setIncomplete(true);
+      return;
+    }
     if (!agreed) {
       setError("Confirm the information is correct to submit your application");
       return;
     }
+    /* Saved in this browser, so it shows up in the examiner's list. */
+    const reference = submitApplication({
+      ...a,
+      typeOfWork: a.typeOfWork,
+      published: a.published,
+      madeForHire: a.madeForHire,
+      owner: a.owner,
+    });
+    saveAnswers({ submittedReference: reference });
     navigate(donePath);
   };
 
@@ -195,6 +224,19 @@ export function ReviewPage() {
           }}
         />
       </GoabFormItem>
+
+      {incomplete && (
+        <GoabCallout
+          type="important"
+          heading="Some answers are missing"
+          mt="2xl"
+          mb="none"
+        >
+          <GoabText size="body-m" mt="none" mb="none">
+            Answer the questions marked Not provided, then submit.
+          </GoabText>
+        </GoabCallout>
+      )}
 
       <GoabButtonGroup alignment="start" mt="2xl">
         <GoabButton type="primary" onClick={submit}>
