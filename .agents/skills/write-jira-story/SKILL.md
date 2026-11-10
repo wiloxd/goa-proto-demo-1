@@ -16,16 +16,7 @@ decide, build, or test the change.
 
 ## This prototype's Jira settings
 
-- **Jira project:** `__JIRA_PROJECT__`
-- **Story template:** `__JIRA_STORY_TEMPLATE__`
-
-If the story template is `none`, use the paste-ready format in this skill.
-
-If there's no Jira project set (the project is `none`, still shows a
-placeholder in double underscores, or this section says no project is set yet),
-**draft stories only and don't create them in Jira.** Say so when you hand over
-the draft, for example: "There's no Jira project set for this prototype yet, so
-I've drafted this story for you to paste in."
+No Jira project set yet: draft stories only and don't create them.
 
 ## Start with evidence
 

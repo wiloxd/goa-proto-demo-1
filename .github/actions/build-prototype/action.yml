@@ -64,19 +64,3 @@ runs:
       # and a relative folder would land there instead of at the repo root.
       run: npm run build -- --outDir "$(realpath -m "$OUTPUT")" --emptyOutDir
 
-    # Template only: the Angular version is built into an angular/ folder inside
-    # each build, so the live template shows both. First-run setup removes
-    # apps/angular/ (or moves it to the top), and this step then does nothing.
-    - name: Build the Angular version
-      shell: bash
-      env:
-        BASE_PATH: ${{ steps.base.outputs.path }}angular/
-        OUTPUT: ${{ inputs.output }}
-      run: |
-        set -euo pipefail
-        if [ ! -f apps/angular/package.json ]; then
-          echo "No apps/angular/ — nothing to build."
-          exit 0
-        fi
-        npm ci --prefix apps/angular
-        npm run build --prefix apps/angular -- --outDir "$(realpath -m "$OUTPUT")/angular"

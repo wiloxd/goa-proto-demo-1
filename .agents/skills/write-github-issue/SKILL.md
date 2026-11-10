@@ -1,6 +1,6 @@
 ---
 name: write-github-issue
-description: Use when filing a GitHub issue in this prototype repo (__REPO__) — a bug, an idea, or a task. Covers a light title and body format so another designer can pick it up cold.
+description: Use when filing a GitHub issue in this prototype repo (wiloxd/goa-proto-demo-1) — a bug, an idea, or a task. Covers a light title and body format so another designer can pick it up cold.
 ---
 
 # Skill: Write a GitHub issue

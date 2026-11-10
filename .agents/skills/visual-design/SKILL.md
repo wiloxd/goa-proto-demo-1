@@ -27,15 +27,7 @@ Container, Button, Form item. Their props and values (`size`, `gap`, `mt`,
 `mb`, `padding`, `labelSize`, `compact`) are the same in every framework. For
 this app's component names and a worked example, read the framework file:
 
-<!-- REACT -->
-
 - `react.md`: the React component for each name, and a worked worker card.
-<!-- /REACT -->
-<!-- ANGULAR -->
-
-- `angular.md`: the Angular component and element for each name, and a worked
-  worker card.
-<!-- /ANGULAR -->
 
 ## When to use
 

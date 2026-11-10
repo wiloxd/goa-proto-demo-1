@@ -1,6 +1,6 @@
 ---
 name: open-pr
-description: Use when opening a pull request in this prototype repo (__REPO__). Covers branching off main, one focused change, the PR body, the preview URL a PR gets automatically, freezing a snapshot, and how merging deploys the live site.
+description: Use when opening a pull request in this prototype repo (wiloxd/goa-proto-demo-1). Covers branching off main, one focused change, the PR body, the preview URL a PR gets automatically, freezing a snapshot, and how merging deploys the live site.
 ---
 
 # Skill: Open a pull request

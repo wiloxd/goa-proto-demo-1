@@ -30,16 +30,8 @@ page's stylesheet.
 The rest of this file applies to any framework. For file paths and code in this
 app, read the framework file:
 
-<!-- REACT -->
-
 - `react.md`: the stylesheet and screens, and the React code for the wrapper
   and cell classes.
-<!-- /REACT -->
-<!-- ANGULAR -->
-
-- `angular.md`: the stylesheet and screens, and the Angular code for the
-  wrapper and cell classes.
-<!-- /ANGULAR -->
 
 ## When to use
 
