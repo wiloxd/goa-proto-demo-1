@@ -12,6 +12,13 @@
   ],
   "snapshots": [
     {
+      "slug": "copyright-connected-demo",
+      "note": "Applicant form and examiner workspace connected: submitted applications and decisions saved in the browser, with Reset demo data.",
+      "ref": "save-demo-data",
+      "commit": "d2c71dc6e1fe75a03eb6c330b959ae64c82f5e2d",
+      "created": "2026-11-10T19:49:23.307Z"
+    },
+    {
       "slug": "copyright-examiner-workspace",
       "note": "The first examiner workspace: applications list, application page with checks and decision, search.",
       "ref": "copyright-examiner-workspace",
