@@ -1,5 +1,5 @@
 /* The confirmation page, following the design system's result page pattern.
- * The reference number is made up. */
+ * The reference number and timeline are made up. */
 
 import { Link } from "react-router-dom";
 import { GoabCallout, GoabText } from "@abgov/react-components";
@@ -10,6 +10,7 @@ import { startPath } from "./journey";
 export function DonePage() {
   const { answers } = useAnswers();
   const titleSize = usePageTitleSize();
+  const email = answers.contactEmail || "the email address you gave us";
 
   return (
     <>
@@ -19,23 +20,34 @@ export function DonePage() {
 
       <GoabCallout type="success" heading="We've received your application">
         <GoabText size="body-m" mt="none" mb="none">
-          Your reference number is <strong>SAMPLE-REF-0001</strong>
+          Your reference number is <strong>SAMPLE-CR-0001</strong>
         </GoabText>
       </GoabCallout>
 
-      <GoabText tag="h2" size="heading-s" mt="xl" mb="s">
+      <GoabText size="body-m" mt="xl" mb="none">
+        We've sent a confirmation to {email}.
+      </GoabText>
+
+      <GoabText tag="h2" size="heading-s" mt="2xl" mb="s">
         What happens next
       </GoabText>
-      <GoabText size="body-m" mt="none" mb="s">
-        We'll review your application within 10 business days.
-        {answers.contactMethod === "phone"
-          ? " We'll phone you when it's done."
-          : answers.contactMethod === "mail"
-            ? " We'll send you a letter when it's done."
-            : " We'll email you when it's done."}
+      <ul className="citizen-list">
+        <li>An examiner checks your application and the copy of your work.</li>
+        <li>
+          If we need anything else, we'll email you. Most applications don't need changes.
+        </li>
+        <li>
+          When we register the work, we'll email you a certificate with a registration
+          number. This usually takes about 3 months.
+        </li>
+      </ul>
+      <GoabText size="body-m" mt="l" mb="none">
+        You already own the copyright in your work. If we register it, the registration
+        counts from today, the day you applied.
       </GoabText>
-      <GoabText size="body-m" mt="none" mb="s">
-        <Link to={startPath}>Go back to the start</Link>
+
+      <GoabText size="body-m" mt="2xl" mb="none">
+        <Link to={startPath}>Register another work</Link>
       </GoabText>
     </>
   );

@@ -1,7 +1,7 @@
 /* The order of the form's questions. Change the order here and the Back and
  * Continue buttons, and the "Question 1 of 4" captions, follow.
  *
- * To add a question: make a page for it (copy NamePage.tsx), add it here, add
+ * To add a question: make a page for it (copy TitlePage.tsx), add it here, add
  * a route in routes.tsx, add it to citizenScreens there, and add a row for it
  * on the review page.
  */
@@ -11,10 +11,14 @@ import { useLocation } from "react-router-dom";
 export const startPath = "/apply";
 
 export const questions = [
-  { path: "/apply/name", label: "Your name" },
-  { path: "/apply/date-of-birth", label: "Date of birth" },
-  { path: "/apply/contact", label: "How to contact you" },
-  { path: "/apply/more-information", label: "Anything else" },
+  { path: "/apply/type-of-work", label: "Type of work" },
+  { path: "/apply/title", label: "Title" },
+  { path: "/apply/finished", label: "Year finished" },
+  { path: "/apply/published", label: "Publication" },
+  { path: "/apply/author", label: "Author" },
+  { path: "/apply/owner", label: "Copyright owner" },
+  { path: "/apply/contact", label: "Contact details" },
+  { path: "/apply/upload", label: "Copy of the work" },
 ];
 
 export const reviewPath = "/apply/review";

@@ -12,3 +12,67 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* A bulleted list in page text, such as "You'll need" on the start page. */
+.citizen-list {
+  font: var(--goa-typography-body-m);
+  margin: 0;
+  padding-left: var(--goa-space-l);
+  max-width: 65ch;
+}
+
+.citizen-list li + li {
+  margin-top: var(--goa-space-xs);
+}
+
+/* Check your answers: the same column widths in every section, so the answers
+   line up down the page. Long answers (an email address) wrap instead of
+   pushing the Change link off the edge. */
+.review-answers td:first-child {
+  width: 35%;
+}
+
+.review-answers td:nth-child(2) {
+  overflow-wrap: break-word;
+}
+
+.review-answers td:last-child {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* On a phone, put the question on its own line, with the answer and Change
+   link underneath, so the answer gets the full width. */
+@media (max-width: 640px) {
+  .review-answers tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .review-answers tr:last-child {
+    border-bottom: none;
+  }
+
+  .review-answers td {
+    border-bottom: none;
+    padding-left: var(--goa-space-m);
+  }
+
+  .review-answers td:first-child {
+    grid-column: 1 / -1;
+    width: auto;
+    padding-left: var(--goa-space-m);
+    padding-bottom: 0;
+  }
+
+  .review-answers td:nth-child(2) {
+    min-width: 0;
+    padding-top: var(--goa-space-2xs);
+  }
+
+  .review-answers td:last-child {
+    padding-top: var(--goa-space-2xs);
+  }
+}

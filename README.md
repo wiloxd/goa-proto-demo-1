@@ -1,4 +1,4 @@
-# Prototype demo
+# Copyright registration
 
 A coded prototype built with the
 [Government of Alberta design system](https://design.alberta.ca). It's for
@@ -86,7 +86,7 @@ Leave `npm run dev` running. Save a file and the page updates by itself.
 | Folder or file | What's in it |
 | --- | --- |
 | `src/worker/` | The worker side: a workspace for people inside government, at `/internal`. A case list, a case page where you record a decision, and search |
-| `src/citizen/` | The citizen side: a public form. A start page at `/apply`, four questions, a check-your-answers page and a done page |
+| `src/citizen/` | The citizen side: a public form. The copyright application: a start page at `/apply`, eight questions, a check-your-answers page and a done page |
 | `src/shared/` | Used by both sides: the directory page at `/`, the prototype controls, the not-found and error pages, the version banner and the prototype's name |
 | `src/data/sample.ts` | Made-up sample data |
 | `src/App.tsx` | The list of every page address, and which sides the directory and the prototype controls show |
@@ -135,7 +135,7 @@ previews and snapshots.
 Links to the Miro boards, Figma files and Confluence pages this prototype is
 based on.
 
-- None yet.
+- [Electronic Copyright Office (eCO)](https://eservice.eco.loc.gov/): the US Copyright Office's online registration, which this prototype simplifies. See [the requirements doc](docs/copyright-application-requirements.md).
 
 ## How it works
 
