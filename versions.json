@@ -1,15 +1,5 @@
 {
-  "previews": [
-    {
-      "slug": "copyright-applicant-form",
-      "branch": "copyright-applicant-form",
-      "pr": "2",
-      "title": "Build the copyright application form",
-      "commit": "52683adb00f0b55cd0d1232f70cc4075755825a0",
-      "created": "2026-11-10T19:15:14.787Z",
-      "updated": "2026-11-10T19:15:14.787Z"
-    }
-  ],
+  "previews": [],
   "snapshots": [
     {
       "slug": "copyright-applicant-form",
