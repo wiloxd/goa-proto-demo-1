@@ -4,6 +4,6 @@
  * (on the template itself) the screens say "Design prototype" instead.
  */
 
-const name = "Prototype demo";
+const name = "Copyright registration";
 
 export const prototypeName = name.startsWith("__") ? "Design prototype" : name;

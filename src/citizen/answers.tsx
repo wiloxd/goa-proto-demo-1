@@ -8,32 +8,56 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-export type ContactMethod = "" | "email" | "phone" | "mail";
+import type { Owner, WorkType, YesNo } from "./options";
 
 export interface Answers {
-  firstName: string;
-  lastName: string;
+  typeOfWork: WorkType;
+  title: string;
+  otherTitle: string;
+  /** Four digits, for example "2024". */
+  yearFinished: string;
+  published: YesNo;
   /** As the date picker gives it: YYYY-MM-DD. */
-  dateOfBirth: string;
-  contactMethod: ContactMethod;
-  moreInformation: string;
+  publishedDate: string;
+  publishedCountry: string;
+  authorName: string;
+  authorCitizenship: string;
+  madeForHire: YesNo;
+  owner: Owner;
+  ownerName: string;
+  ownerAddress: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  /** Only the file's details are kept. Nothing is uploaded anywhere. */
+  fileName: string;
+  fileSize: number;
+  fileType: string;
 }
 
 export const emptyAnswers: Answers = {
-  firstName: "",
-  lastName: "",
-  dateOfBirth: "",
-  contactMethod: "",
-  moreInformation: "",
+  typeOfWork: "",
+  title: "",
+  otherTitle: "",
+  yearFinished: "",
+  published: "",
+  publishedDate: "",
+  publishedCountry: "",
+  authorName: "",
+  authorCitizenship: "",
+  madeForHire: "",
+  owner: "",
+  ownerName: "",
+  ownerAddress: "",
+  contactName: "",
+  contactEmail: "",
+  contactPhone: "",
+  fileName: "",
+  fileSize: 0,
+  fileType: "",
 };
 
-export const contactMethodLabels: Record<Exclude<ContactMethod, "">, string> = {
-  email: "Email",
-  phone: "Phone",
-  mail: "Mail",
-};
-
-const STORAGE_KEY = "proto:answers";
+const STORAGE_KEY = "proto:copyright-answers";
 
 function loadAnswers(): Answers {
   try {
@@ -77,7 +101,9 @@ export function AnswersProvider({
   }, []);
 
   return (
-    <AnswersContext.Provider value={{ answers, saveAnswers }}>{children}</AnswersContext.Provider>
+    <AnswersContext.Provider value={{ answers, saveAnswers }}>
+      {children}
+    </AnswersContext.Provider>
   );
 }
 

@@ -98,8 +98,8 @@ describe("the citizen side", () => {
   });
 
   it("numbers the questions", () => {
-    expect(renderAt("/apply/name")).toContain("Question 1 of 4");
-    expect(renderAt("/apply/more-information")).toContain("Question 4 of 4");
+    expect(renderAt("/apply/type-of-work")).toContain("Question 1 of 8");
+    expect(renderAt("/apply/upload")).toContain("Question 8 of 8");
   });
 
   it("shows 'Not provided' for answers not given yet", () => {
