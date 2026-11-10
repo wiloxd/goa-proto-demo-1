@@ -8,7 +8,8 @@
    heading or banner ever hides behind it, whatever the page puts first. */
 @media (max-width: 623px) {
   .worker-page {
-    padding: calc(18px + 32px + var(--goa-space-m)) var(--goa-space-m) var(--goa-space-2xl);
+    padding: calc(18px + 32px + var(--goa-space-m)) var(--goa-space-m)
+      var(--goa-space-2xl);
   }
 }
 
@@ -16,4 +17,9 @@
    inline and drops a top margin (see the table-sizing skill). */
 .search-results {
   margin-top: var(--goa-space-xl);
+}
+
+/* Applications list: references and dates stay on one line. */
+.applications-table td.nowrap {
+  white-space: nowrap;
 }

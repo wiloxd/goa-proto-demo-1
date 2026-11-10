@@ -66,26 +66,41 @@ describe("the prototype controls", () => {
 
 // ---- WORKER ----
 describe("the worker side", () => {
-  it("shows the sample cases at /internal, each linking to its case", () => {
+  it("lists the sample applications at /internal, each linking to its page", () => {
     const markup = renderAt("/internal");
     expect(markup).toContain("goa-workspace-layout");
-    expect(markup).toContain("Test Person A");
-    expect(markup).toContain('href="/internal/cases/SAMPLE-001"');
+    expect(markup).toContain("Sample Novel Title");
+    expect(markup).toContain('href="/internal/applications/SAMPLE-CR-0006"');
   });
 
-  it("shows a case's details and a decision form", () => {
-    const markup = renderAt("/internal/cases/SAMPLE-003");
-    expect(markup).toContain("Test Person C");
-    expect(markup).toContain("July 21, 2001");
+  it("shows a new application's details, checks and a decision form", () => {
+    const markup = renderAt("/internal/applications/SAMPLE-CR-0006");
+    expect(markup).toContain("Sample Press Ltd");
+    expect(markup).toContain("March 3, 2026, Canada");
+    expect(markup).toContain("sample-novel.pdf");
+    expect(markup).toContain("Checks");
     expect(markup).toContain("Record decision");
   });
 
-  it("says so when a case doesn't exist", () => {
-    expect(renderAt("/internal/cases/NOPE")).toContain("Case not found");
+  it("shows the outcome instead of the form once there is one", () => {
+    const registered = renderAt("/internal/applications/SAMPLE-CR-0002");
+    expect(registered).toContain("SAMPLE-REG-0002");
+    expect(registered).not.toContain("Record decision");
+
+    const refused = renderAt("/internal/applications/SAMPLE-CR-0001");
+    expect(refused).toContain("Not something copyright protects");
+
+    expect(renderAt("/internal/applications/SAMPLE-CR-0003")).toContain(
+      "Message to the applicant",
+    );
+  });
+
+  it("says so when an application doesn't exist", () => {
+    expect(renderAt("/internal/applications/NOPE")).toContain("Application not found");
   });
 
   it("shows a search box at /internal/search", () => {
-    expect(renderAt("/internal/search")).toContain("Name or case ID");
+    expect(renderAt("/internal/search")).toContain("Reference, title or author");
   });
 });
 

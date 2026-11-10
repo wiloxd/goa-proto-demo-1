@@ -47,9 +47,11 @@ export function WorkerShell() {
         <>
           <GoabWorkSideMenuItem
             icon="list"
-            label="Cases"
+            label="Applications"
             url={`${base}/internal`}
-            current={pathname === "/internal" || pathname.startsWith("/internal/cases")}
+            current={
+              pathname === "/internal" || pathname.startsWith("/internal/applications")
+            }
           />
           <GoabWorkSideMenuItem
             icon="search"

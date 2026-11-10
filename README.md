@@ -85,7 +85,7 @@ Leave `npm run dev` running. Save a file and the page updates by itself.
 
 | Folder or file | What's in it |
 | --- | --- |
-| `src/worker/` | The worker side: a workspace for people inside government, at `/internal`. A case list, a case page where you record a decision, and search |
+| `src/worker/` | The worker side: a workspace for people inside government, at `/internal`. The examiner workspace: a list of copyright applications, an application page with checks and a decision (register, ask for changes or refuse), and search |
 | `src/citizen/` | The citizen side: a public form. The copyright application: a start page at `/apply`, eight questions, a check-your-answers page and a done page |
 | `src/shared/` | Used by both sides: the directory page at `/`, the prototype controls, the not-found and error pages, the version banner and the prototype's name |
 | `src/data/sample.ts` | Made-up sample data |

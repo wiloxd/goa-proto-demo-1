@@ -1,86 +1,232 @@
-/* Sample data for the starter screens.
+/* Sample copyright applications for the examiner workspace.
  *
  * Everything here is made up, and meant to look made up. Never put real names,
- * SINs, case details or anything copied from an internal system in this file
- * (or anywhere else in the prototype). If you need more realistic data, ask the
- * AI to invent it.
+ * real works, or anything copied from an internal system in this file (or
+ * anywhere else in the prototype). If you need more realistic data, ask the AI
+ * to invent it.
+ *
+ * Each application holds the same answers the applicant form collects, so the
+ * two sides line up.
  */
 
 import type { GoabBadgeType } from "@abgov/ui-components-common";
+import type { Owner, WorkType, YesNo } from "../shared/copyright";
 
-export type SampleStatus = "New" | "In progress" | "Waiting" | "Done";
+export type ApplicationStatus =
+  | "New"
+  | "In review"
+  | "Waiting on applicant"
+  | "Registered"
+  | "Refused";
 
-export interface SampleCase {
+export interface SampleApplication {
   id: string;
-  name: string;
   submitted: string;
-  status: SampleStatus;
-  dateOfBirth: string;
-  contactMethod: "Email" | "Phone" | "Mail";
-  notes: string;
+  status: ApplicationStatus;
+  typeOfWork: Exclude<WorkType, "">;
+  title: string;
+  otherTitle: string;
+  yearFinished: string;
+  published: Exclude<YesNo, "">;
+  publishedDate: string;
+  publishedCountry: string;
+  authorName: string;
+  authorCitizenship: string;
+  madeForHire: Exclude<YesNo, "">;
+  owner: Exclude<Owner, "">;
+  ownerName: string;
+  ownerAddress: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  fileName: string;
+  fileSize: number;
+  /** What happened, for applications that already have an outcome. */
+  outcome?: {
+    by: string;
+    on: string;
+    /** Registered: the registration number. */
+    registrationNumber?: string;
+    /** Refused: the reason given. */
+    reason?: string;
+    /** Waiting on applicant or Refused: what the applicant was told. */
+    message?: string;
+  };
 }
 
-export const sampleCases: SampleCase[] = [
+export const sampleApplications: SampleApplication[] = [
   {
-    id: "SAMPLE-001",
-    name: "Test Person A",
-    submitted: "2025-01-06",
+    id: "SAMPLE-CR-0006",
+    submitted: "2026-11-09",
     status: "New",
-    dateOfBirth: "1990-03-14",
-    contactMethod: "Email",
-    notes: "Asked if they can apply for a family member too.",
+    typeOfWork: "writing",
+    title: "Sample Novel Title",
+    otherTitle: "Working title: The Sample Chapters",
+    yearFinished: "2025",
+    published: "yes",
+    publishedDate: "2026-03-03",
+    publishedCountry: "Canada",
+    authorName: "Test Author A",
+    authorCitizenship: "Canada",
+    madeForHire: "no",
+    owner: "someone-else",
+    ownerName: "Sample Press Ltd",
+    ownerAddress: "100 Sample Street, Sampletown",
+    contactName: "Test Author A",
+    contactEmail: "author.a@example.com",
+    contactPhone: "",
+    fileName: "sample-novel.pdf",
+    fileSize: 2_400_000,
   },
   {
-    id: "SAMPLE-002",
-    name: "Test Person B",
-    submitted: "2025-01-04",
-    status: "In progress",
-    dateOfBirth: "1985-11-02",
-    contactMethod: "Phone",
-    notes: "",
+    id: "SAMPLE-CR-0005",
+    submitted: "2026-11-06",
+    status: "New",
+    typeOfWork: "film",
+    title: "Sample Short Film",
+    otherTitle: "",
+    yearFinished: "2026",
+    published: "no",
+    publishedDate: "",
+    publishedCountry: "",
+    authorName: "Test Author E",
+    authorCitizenship: "Australia",
+    madeForHire: "no",
+    owner: "author",
+    ownerName: "",
+    ownerAddress: "",
+    contactName: "Test Author E",
+    contactEmail: "author.e@example.com",
+    contactPhone: "555-0105",
+    fileName: "sample-short-film.mp4",
+    fileSize: 48_200_000,
   },
   {
-    id: "SAMPLE-003",
-    name: "Test Person C",
-    submitted: "2025-01-03",
-    status: "Waiting",
-    dateOfBirth: "2001-07-21",
-    contactMethod: "Mail",
-    notes: "Waiting for a document they said they would mail in.",
+    id: "SAMPLE-CR-0004",
+    submitted: "2026-11-02",
+    status: "In review",
+    typeOfWork: "visual-art",
+    title: "Untitled Sample Landscape No. 4",
+    otherTitle: "",
+    yearFinished: "2024",
+    published: "no",
+    publishedDate: "",
+    publishedCountry: "",
+    authorName: "Test Author B",
+    authorCitizenship: "United Kingdom",
+    madeForHire: "no",
+    owner: "author",
+    ownerName: "",
+    ownerAddress: "",
+    contactName: "Test Author B",
+    contactEmail: "author.b@example.com",
+    contactPhone: "",
+    fileName: "sample-landscape-4.jpg",
+    fileSize: 3_100_000,
   },
   {
-    id: "SAMPLE-004",
-    name: "Test Person D",
-    submitted: "2024-12-19",
-    status: "Done",
-    dateOfBirth: "1978-05-30",
-    contactMethod: "Email",
-    notes: "",
+    id: "SAMPLE-CR-0003",
+    submitted: "2026-10-27",
+    status: "Waiting on applicant",
+    typeOfWork: "music",
+    title: "Sample Song Lyrics",
+    otherTitle: "",
+    yearFinished: "2025",
+    published: "yes",
+    publishedDate: "2025-06-12",
+    publishedCountry: "United States",
+    authorName: "Test Author C",
+    authorCitizenship: "Canada",
+    madeForHire: "yes",
+    owner: "someone-else",
+    ownerName: "Sample Records Inc",
+    ownerAddress: "200 Example Avenue, Sample City",
+    contactName: "Test Contact C",
+    contactEmail: "contact.c@example.com",
+    contactPhone: "",
+    fileName: "sample-lyrics-verse-1.pdf",
+    fileSize: 84_000,
+    outcome: {
+      by: "Sample Worker",
+      on: "2026-11-03",
+      message:
+        "The file you uploaded has the first verse only. Upload the complete lyrics so we can register the whole work.",
+    },
   },
   {
-    id: "SAMPLE-005",
-    name: "Test Person E",
-    submitted: "2024-12-17",
-    status: "In progress",
-    dateOfBirth: "1995-09-09",
-    contactMethod: "Phone",
-    notes: "Prefers calls after 3 pm.",
+    id: "SAMPLE-CR-0002",
+    submitted: "2026-10-20",
+    status: "Registered",
+    typeOfWork: "sound-recording",
+    title: "Sample Podcast, Episode 1",
+    otherTitle: "",
+    yearFinished: "2026",
+    published: "yes",
+    publishedDate: "2026-02-14",
+    publishedCountry: "Canada",
+    authorName: "Test Author D",
+    authorCitizenship: "Canada",
+    madeForHire: "no",
+    owner: "author",
+    ownerName: "",
+    ownerAddress: "",
+    contactName: "Test Author D",
+    contactEmail: "author.d@example.com",
+    contactPhone: "",
+    fileName: "sample-podcast-ep1.mp3",
+    fileSize: 31_500_000,
+    outcome: {
+      by: "Sample Worker",
+      on: "2026-10-30",
+      registrationNumber: "SAMPLE-REG-0002",
+    },
+  },
+  {
+    id: "SAMPLE-CR-0001",
+    submitted: "2026-10-14",
+    status: "Refused",
+    typeOfWork: "writing",
+    title: "The Big Sample Idea",
+    otherTitle: "",
+    yearFinished: "2026",
+    published: "no",
+    publishedDate: "",
+    publishedCountry: "",
+    authorName: "Test Author F",
+    authorCitizenship: "Another country",
+    madeForHire: "no",
+    owner: "author",
+    ownerName: "",
+    ownerAddress: "",
+    contactName: "Test Author F",
+    contactEmail: "author.f@example.com",
+    contactPhone: "",
+    fileName: "big-idea-summary.txt",
+    fileSize: 1_200,
+    outcome: {
+      by: "Sample Worker",
+      on: "2026-10-22",
+      reason: "Not something copyright protects",
+      message:
+        "The file describes an idea for a story. Copyright protects the finished work, not the idea for it.",
+    },
   },
 ];
 
-export function findCase(id: string | undefined) {
-  return sampleCases.find((c) => c.id === id);
+export function findApplication(id: string | undefined) {
+  return sampleApplications.find((a) => a.id === id);
 }
 
 /* Which badge colour each status uses. */
-export const statusBadge: Record<SampleStatus, GoabBadgeType> = {
+export const statusBadge: Record<ApplicationStatus, GoabBadgeType> = {
   New: "important",
-  "In progress": "information",
-  Waiting: "default",
-  Done: "success",
+  "In review": "information",
+  "Waiting on applicant": "default",
+  Registered: "success",
+  Refused: "emergency",
 };
 
 export const sampleWorker = {
   name: "Sample Worker",
-  role: "Test team",
+  role: "Registration examiner",
 };
